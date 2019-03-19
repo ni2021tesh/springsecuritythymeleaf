@@ -3,13 +3,10 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="stylesheet" href="../../static/css/main.css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" href="../../static/css/main.css" th:href="@{css/main.css}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"
-          th:href="@{/css/bootstrap.min.css}">
+          integrity="" th:href="@{css/bootstrap.min.css}">
 </head>
 <body>
 
@@ -28,21 +25,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a id="home" class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        Services
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item items" href="#">Spring Security Training</a>
-                        <a class="dropdown-item items" href="#">Spring Boot Online Training</a>
-                        <a class="dropdown-item items" href="#">RestFul Webservices Training</a>
-                        <a class="dropdown-item items" href="#">Something else here</a>
-                    </div>
+                    <a id="home" class="nav-link" href="#" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
 
@@ -55,15 +38,17 @@
     </div>
 </nav>
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"
-        th:href="@{/js/jquery-3.3.1.min.js}"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"
-        th:href="@{/js/bootstrap.min.js}"></script>
+<div th:fragment="scriptJs">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+
+            integrity=""
+            th:href="@{/js/jquery-3.3.1.min.js}"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity=""
+            th:href="@{/js/bootstrap.min.js}"></script>
+</div>
 </body>
-</html>
+</html>                                                                                       fff
