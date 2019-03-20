@@ -1,25 +1,11 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8"/>
-    <title>Login Page</title>
-    <link rel="stylesheet" href="../../static/css/main.css" th:href="@{css/main.css}">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="" th:href="@{css/bootstrap.min.css}">
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:include="/fragment/layout :: layout(title='Login Page')">
+
 <body>
-
-
-<nav id='nav' class="navbar navbar-expand-lg navbar-light" th:replace="fragment/navbar :: navbar">
-    <p>sample</p>
-</nav>
-
-
-<div class="container">
+<div class="container" th:fragment="content1">
     <div id="jumboLog" class="jumbotron">
         <h1 id="reg-h1">Login In</h1>
+        <div th:if="${successMessage}" th:text="${successMessage}" class="alert alert-success">Message</div>
         <form action="../../templates/html/login.html" method="post" th:object="${user}">
             <div class="form-group">
                 <label for="inputEmail">Email address</label>
@@ -35,15 +21,12 @@
             </div>
             <div class="form-actions col-xs-offset-2 col-xs-10">
                 <input type="submit" class="btn btn-primary" value="Sign In"/>
-                <a class="btn btn-primary" href="#">Reset Password</a>
+                <a class="btn btn-primary" href="#" th:href="@{/forgotPassword}">Forgot Password</a>
             </div>
         </form>
     </div>
 
 </div>
 
-<div th:replace="fragment/navbar :: scriptJs">
-    <p>script include here</p>
-</div>
 </body>
 </html>

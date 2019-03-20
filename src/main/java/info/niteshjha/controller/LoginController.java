@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -15,14 +17,15 @@ import javax.validation.Valid;
 public class LoginController {
 
     @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
-    public String saveUser(@Valid User user, BindingResult result) {
+    public ModelAndView saveUser(@Valid User user, BindingResult result, RedirectAttributes redirectAttributes) {
 
         new ValidatePassword().validate(user, result);
 
         if (result.hasErrors()) {
-            return "signup";
+            return new ModelAndView("signup");
         }
         System.out.println(user.toString());
-        return "redirect:/login";
+        redirectAttributes.addFlashAttribute("successMessage", "User Created Successfully");
+        return new ModelAndView("redirect:/login");
     }
 }

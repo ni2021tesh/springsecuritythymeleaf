@@ -12,8 +12,14 @@ public class IndexController {
     public ModelAndView getIndex() {
         return new ModelAndView("/login", "user", new User());
     }
+
     @RequestMapping("/signup")
     public ModelAndView register() {
         return new ModelAndView("/signup", "user", new User());
+    }
+
+    @RequestMapping("/forgotPassword")
+    public ModelAndView forgotPassword() {
+        return new ModelAndView("/forgotPassword", "user", new User());
     }
 }
