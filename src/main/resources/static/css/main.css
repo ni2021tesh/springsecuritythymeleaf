@@ -6,7 +6,7 @@
     padding-bottom: 50px;
 }
 
-#rst-pwd-jumboLog{
+#rst-pwd-jumboLog {
     margin-top: 100px;
     background: #525E74;
     color: White;
@@ -28,7 +28,16 @@
     font-size: 18px;
 }
 
+#nav1 {
+    background-color: #63b175;
+    font-size: 18px;
+}
+
 #home {
+    color: white;
+}
+
+#ahome {
     color: white;
 }
 
@@ -53,6 +62,14 @@ a#signup.nav-link {
     color: white;
 }
 
+a#logout.nav-link {
+    color: white;
+}
+
+#anavlink {
+    color: white;
+}
+
 small#emailHelp.form-text.text-muted {
     color: white !important;
 }
@@ -71,7 +88,6 @@ a.btn.btn-primary {
 }
 
 body {
-
     background: url("https://images.unsplash.com/photo-1550055280-766ba3e748b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60") no-repeat center fixed;
     background-size: cover;
 }
@@ -97,4 +113,23 @@ input#resetEmail.form-control {
     height: calc(1.5em + .75rem + 2px);
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+#userList {
+    margin-top: 15px;
+    color: black;
+}
+
+
+#userListJumbo {
+    margin-top: 50px;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#userListh1 {
+    padding-top: 0;
+    color: orangered;
+    text-align: center;
 }
