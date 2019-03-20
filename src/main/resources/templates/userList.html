@@ -22,8 +22,8 @@
                     <a th:href="@{'/modifyUser/'+${user.id}}" th:text="${user.email}">Email</a>
                 </td>
                 <td th:text="${user.name}">Name</td>
-                <td th:text="${#dates.format(user.dateCreated, 'yyyy-MM-dd HH:mm:ss')}">Date Created</td>
-                <td th:text="${#dates.format(user.dateModified, 'yyyy-MM-dd HH:mm:ss')}">Date modified</td>
+                <td th:text="${#temporals.format(user.dateCreated, 'dd-MM-yyyy HH:mm')}">Date Created</td>
+                <td th:text="${#temporals.format(user.dateModified, 'dd-MM-yyyy HH:mm')}">Date modified</td>
             </tr>
             </tbody>
         </table>

@@ -10,9 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -50,7 +48,7 @@ public class UserCreateService {
     @Transactional(rollbackFor = Exception.class)
     public UserCreate modifyUser(UserCreate userModify) {
         logger.info("Modifying user with email :: " + userModify.getEmail());
-        userModify.setDateModified(new Date());
+        userModify.setDateModified(LocalDateTime.now());
         return this.userCreateRepository.save(userModify);
     }
 
@@ -58,7 +56,7 @@ public class UserCreateService {
     @Transactional(rollbackFor = Exception.class)
     public UserCreate createUser(UserCreate userCreate) {
         logger.info("Creating user with email :: " + userCreate.getEmail());
-        userCreate.setDateCreated(new Date());
+        userCreate.setDateCreated(LocalDateTime.now());
         return this.userCreateRepository.save(userCreate);
     }
 }

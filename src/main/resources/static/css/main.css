@@ -1,5 +1,5 @@
 #jumboLog {
-    margin-top: 30px;
+    margin-top: 100px;
     background: #525E74;
     color: White;
     padding-top: 18px;
@@ -16,7 +16,7 @@
 
 
 #jumboSign {
-    margin-top: 30px;
+    margin-top: 100px;
     background: #525E74;
     color: White;
     padding-top: 18px;
@@ -78,6 +78,8 @@ small#emailHelp.form-text.text-muted {
 #reg-h1 {
     margin-top: 0;
     margin-bottom: 25px;
+    text-align: center;
+    color: orangered;
 }
 
 a.btn.btn-primary {
@@ -122,7 +124,7 @@ input#resetEmail.form-control {
 
 
 #userListJumbo {
-    margin-top: 50px;
+    margin-top: 100px;
     color: white;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -132,4 +134,25 @@ input#resetEmail.form-control {
     padding-top: 0;
     color: orangered;
     text-align: center;
+}
+
+
+#cudiv {
+    margin-top: 100px;
+    background: #e9ecef;
+    padding: 20px 30px 30px;
+    border-radius: 0.5em;
+    margin-bottom: 40px;
+}
+
+#modDiv {
+    float: right;
+    border: 1.3px solid #007bff;
+    margin-left: 0;
+    padding: .375rem .75rem;
+    line-height: 1.5;
+}
+
+#modDiv:hover {
+    background: #0062cc;
 }

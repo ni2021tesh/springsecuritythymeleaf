@@ -2,8 +2,8 @@ package info.niteshjha.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
@@ -13,16 +13,6 @@ import java.util.Locale;
 
 @Configuration
 public class SpringLocaleConfig implements WebMvcConfigurer {
-
-    @Bean
-    public DateFormatter dateFormatter() {
-        return new DateFormatter();
-    }
-
-    @Override
-    public void addFormatters(FormatterRegistry registry) {
-        registry.addFormatter(dateFormatter());
-    }
 
     @Bean
     public LocaleResolver localeResolver() {

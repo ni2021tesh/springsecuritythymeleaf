@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,7 +30,8 @@ public class UserCreate {
     private String name;
     private String email;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date dateCreated;
+    @Column(updatable = false)
+    private LocalDateTime dateCreated;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date dateModified;
+    private LocalDateTime dateModified;
 }

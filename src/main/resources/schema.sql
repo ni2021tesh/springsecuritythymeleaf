@@ -1,5 +1,4 @@
-drop table if exists user_create;
-create table user_create
+create table if not exists user_create
 (
   id            int primary key AUTO_INCREMENT,
   date_created  varchar(50),
@@ -8,4 +7,3 @@ create table user_create
   name          varchar(50)
 );
 
-truncate table user_create;
