@@ -3,7 +3,7 @@
 package info.niteshjha.service;
 
 import info.niteshjha.exception.UserNotFoundException;
-import info.niteshjha.model.UserCreate;
+import info.niteshjha.model.User;
 import info.niteshjha.repository.UserCreateRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,13 +28,13 @@ public class UserCreateService {
     }
 
 
-    public List<UserCreate> getUserList() {
+    public List<User> getUserList() {
         logger.info("Fetching the list of users from database");
         return StreamSupport.stream(this.userCreateRepository.findAll().spliterator(), false).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
-    public UserCreate getCreatedUser(Long userId) {
+    public User getCreatedUser(Long userId) {
         logger.info("Fetching user with id :: " + userId);
         return this.userCreateRepository.findById(userId).orElseThrow(UserNotFoundException::new);
     }
@@ -46,7 +46,7 @@ public class UserCreateService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public UserCreate modifyUser(UserCreate userModify) {
+    public User modifyUser(User userModify) {
         logger.info("Modifying user with email :: " + userModify.getEmail());
         userModify.setDateModified(LocalDateTime.now());
         return this.userCreateRepository.save(userModify);
@@ -54,7 +54,7 @@ public class UserCreateService {
 
 
     @Transactional(rollbackFor = Exception.class)
-    public UserCreate createUser(UserCreate userCreate) {
+    public User createUser(User userCreate) {
         logger.info("Creating user with email :: " + userCreate.getEmail());
         userCreate.setDateCreated(LocalDateTime.now());
         return this.userCreateRepository.save(userCreate);

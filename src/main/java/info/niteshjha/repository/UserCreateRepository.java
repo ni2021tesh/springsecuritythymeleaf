@@ -2,8 +2,8 @@
 
 package info.niteshjha.repository;
 
-import info.niteshjha.model.UserCreate;
+import info.niteshjha.model.User;
 import org.springframework.data.repository.CrudRepository;
 
-public interface UserCreateRepository extends CrudRepository<UserCreate,Long> {
+public interface UserCreateRepository extends CrudRepository<User, Long> {
 }

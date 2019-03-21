@@ -2,7 +2,7 @@
 
 package info.niteshjha.controller;
 
-import info.niteshjha.model.UserCreate;
+import info.niteshjha.model.User;
 import info.niteshjha.service.UserCreateService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,12 +21,12 @@ public class UserController {
 
     @RequestMapping(value = "/createUser", method = RequestMethod.GET)
     public ModelAndView getUser() {
-        return new ModelAndView("createUser").addObject("user", new UserCreate());
+        return new ModelAndView("createUser").addObject("user", new User());
     }
 
     @RequestMapping(value = "/createUser", method = RequestMethod.POST)
-    public ModelAndView createUser(UserCreate userCreate) {
-        UserCreate userCreated = this.userCreateService.createUser(userCreate);
+    public ModelAndView createUser(User userCreate) {
+        User userCreated = this.userCreateService.createUser(userCreate);
         return new ModelAndView("redirect:/userList").addObject("user", this.userCreateService.getUserList());
     }
 
@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/modifyUser", method = RequestMethod.POST)
-    public ModelAndView modifyUser(UserCreate modifyUser) {
+    public ModelAndView modifyUser(User modifyUser) {
         this.userCreateService.modifyUser(modifyUser);
         return new ModelAndView("redirect:/userList").addObject("user", this.userCreateService.getUserList());
     }
@@ -48,5 +48,9 @@ public class UserController {
         return new ModelAndView("redirect:/userList").addObject("user", this.userCreateService.getUserList());
     }
 
+    @RequestMapping(value = "/resetPassword", method = RequestMethod.GET)
+    public ModelAndView resetPassword(Long userId) {
+        return new ModelAndView("resetPassword").addObject("user", new User());
+    }
 
 }
