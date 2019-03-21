@@ -6,4 +6,6 @@ import info.niteshjha.model.User;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UserCreateRepository extends CrudRepository<User, Long> {
+
+    User findByEmail(String email);
 }

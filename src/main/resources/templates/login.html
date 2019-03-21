@@ -5,19 +5,21 @@
 <div class="container" th:fragment="content1">
     <div id="jumboLog" class="jumbotron">
         <h1 id="reg-h1">Login In</h1>
+        <div th:if="${param.error}" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"
+             class="alert alert-danger">Login Error
+        </div>
         <div th:if="${successMessage}" th:text="${successMessage}" class="alert alert-success">Message</div>
-        <form action="../../templates/html/login.html" method="post" th:object="${user}">
+        <div th:if="${param.logout}" class="alert alert-success">You have been logged out.</div>
+        <form action="../../templates/html/login.html" th:action="@{/doLogin}" method="post">
             <div class="form-group">
-                <label for="inputEmail">Email address</label>
-                <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"
-                       placeholder="Enter email" name="email" required="required" th:field="*{email}"/>
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.
-                </small>
+                <label for="username">User Name</label>
+                <input type="text" class="form-control" id="username" aria-describedby="nameHelp"
+                       placeholder="Enter Your User Name" name="username" required="required"/>
             </div>
             <div class="form-group">
                 <label for="inputPassword1">Password</label>
                 <input type="password" class="form-control" name="password" id="inputPassword1" placeholder="Password"
-                       required="required" th:field="*{password}"/>
+                       required="required"/>
             </div>
             <div class="form-actions col-xs-offset-2 col-xs-10">
                 <input type="submit" class="btn btn-primary" value="Sign In"/>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -48,8 +49,8 @@ public class UserController {
         return new ModelAndView("redirect:/userList").addObject("user", this.userCreateService.getUserList());
     }
 
-    @RequestMapping(value = "/resetPassword", method = RequestMethod.GET)
-    public ModelAndView resetPassword(Long userId) {
+    @RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
+    public ModelAndView resetPassword(@RequestParam("email") String email) {
         return new ModelAndView("resetPassword").addObject("user", new User());
     }
 
