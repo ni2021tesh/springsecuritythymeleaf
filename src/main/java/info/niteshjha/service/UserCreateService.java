@@ -2,6 +2,7 @@
 
 package info.niteshjha.service;
 
+import info.niteshjha.exception.EmailExistsException;
 import info.niteshjha.exception.UserNotFoundException;
 import info.niteshjha.model.User;
 import info.niteshjha.repository.UserCreateRepository;
@@ -36,7 +37,7 @@ public class UserCreateService {
     @Transactional(readOnly = true)
     public User getCreatedUser(Long userId) {
         logger.info("Fetching user with id :: " + userId);
-        return this.userCreateRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+        return this.userCreateRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User Not Found Exception"));
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -59,4 +60,25 @@ public class UserCreateService {
         userCreate.setDateCreated(LocalDateTime.now());
         return this.userCreateRepository.save(userCreate);
     }
+
+    @Transactional(rollbackFor = Exception.class)
+    public User createSignUpUser(User user) {
+        logger.info("Creating sign up user with email :: " + user.getEmail());
+        if (checkUserExist(user)) {
+            throw new EmailExistsException("There is already an account with email id::" + user.getEmail());
+        }
+        user.setDateCreated(LocalDateTime.now());
+        return this.userCreateRepository.save(user);
+    }
+
+    private boolean checkUserExist(User user) {
+        User byEmail = this.userCreateRepository.findByEmail(user.getEmail());
+        return byEmail != null;
+    }
+
+    public User getUserByEmail(String email) {
+        return this.userCreateRepository.findByEmail(email);
+    }
+
+
 }

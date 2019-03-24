@@ -11,9 +11,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.logging.Logger;
 
 @Service
 public class UserService implements UserDetailsService {
+
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     private UserCreateRepository userCreateRepository;
 
@@ -27,14 +30,15 @@ public class UserService implements UserDetailsService {
         User user = userCreateRepository.findByEmail(email);
 
         if (user == null) {
-            throw new UsernameNotFoundException("No user found with username ::" + email);
+            logger.info("No User found with email :: " + email);
+            throw new UsernameNotFoundException("No user found with username :: " + email);
         }
 
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), true, true, true, true, getAuthorities("ROLE_USER"));
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), user.isEnabled(), true, true, true, getAuthorities("ROLE_USER"));
     }
 
 
-    public Collection<? extends GrantedAuthority> getAuthorities(String role) {
+    private Collection<? extends GrantedAuthority> getAuthorities(String role) {
         return Collections.singletonList(new SimpleGrantedAuthority(role));
     }
 }

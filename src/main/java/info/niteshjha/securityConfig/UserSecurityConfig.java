@@ -39,8 +39,8 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {  //@formatter:off
-
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
+        //@formatter:on
     }
 
     @Override
@@ -53,7 +53,11 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
                                          "/forgotPassword*",
                                          "/js/**",
                                          "/img/**",
-                                         "/css/**").permitAll()
+                                         "/css/**",
+                                         "/user/forgotPassword*",
+                                         "/changePassword*",
+                                         "/saveUser*",
+                                         "/confirmEmail*").permitAll()
                 .anyRequest().authenticated()
 
                 .and().formLogin()

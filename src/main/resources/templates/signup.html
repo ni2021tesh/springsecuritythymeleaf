@@ -6,13 +6,15 @@
     <div id="jumboSign" class="jumbotron">
         <h1 id="reg-h1">Registration Page </h1>
         <form action="/saveUser" method="POST" th:action="@{/saveUser}" th:object="${user}">
-            <div class="form-group">
+            <div class="form-group" th:classappend="${#fields.hasErrors('email')} ? 'invalid'">
                 <label for="inputEmail">Email address</label>
                 <!--/*@thymesVar id="email" type="java.lang.String"*/-->
                 <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"
-                       placeholder="Enter email" required="required" title="email cannot be null" name="email" th:field="*{email}"/>
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.
-                </small>
+                       placeholder="Enter email" required="required" title="email cannot be null" name="email"
+                       th:field="*{email}"/>
+
+                <span id="conPass" th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error">Email Id Exists</span>
+
             </div>
             <div class="form-group">
                 <label for="reg-pwd">Password</label>
@@ -20,11 +22,11 @@
                        name="password" th:field="*{password}"/>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" th:classappend="${#fields.hasErrors('confirmPassword')} ? 'invalid'">
                 <label for="conf-pwd">Confirm Password</label>
                 <input type="password" class="form-control" id="conf-pwd" placeholder="Confirm Password"
                        name="confirmPassword" required="required" th:field="*{confirmPassword}"/>
-                <div id="conPass" th:errors="*{confirmPassword}" class="alert alert-primary" role="alert">Error Message</div>
+                <span id="conPass" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="form-text">Password Confirmation Error</span>
             </div>
             <input type="submit" class="btn btn-primary" name="Create User" value="Create User"/>
         </form>

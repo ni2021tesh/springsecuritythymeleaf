@@ -49,8 +49,8 @@ public class UserController {
         return new ModelAndView("redirect:/userList").addObject("user", this.userCreateService.getUserList());
     }
 
-    @RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
-    public ModelAndView resetPassword(@RequestParam("email") String email) {
+    @RequestMapping(value = "/resetPassword", method = RequestMethod.GET)
+    public ModelAndView resetPassword() {
         return new ModelAndView("resetPassword").addObject("user", new User());
     }
 
