@@ -109,7 +109,7 @@ public class IndexController {
         }
 
         if (resetToken.isUsed()) {
-            log.info("Provided Password reset Token is invalid.");
+            log.info("Provided Password reset Token is already Used.");
             redirectAttributes.addFlashAttribute("errorMessage", "Provided Password reset Token is invalid.");
             return new ModelAndView("redirect:/login");
         }
@@ -146,6 +146,7 @@ public class IndexController {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         principal.setPassword(password);
+        principal.setEnabled(true);
 
         userCreateService.modifyUser(principal);
 

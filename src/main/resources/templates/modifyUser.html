@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:include="/fragment/layoutLoggedIn :: layoutLoggedIn(title='Modify User')">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:include="/fragment/layoutLoggedIn :: layoutLoggedIn(title='Modify User')">
 
 
 <body>
@@ -12,6 +13,10 @@
             <form action="#" method="POST" th:action="@{/modifyUser}" th:object="${user}">
 
                 <input type="hidden" th:value="${user.id}" th:field="*{id}" name="id">
+
+                <input type="hidden" th:value="${user.password}" th:field="*{password}" name="password">
+
+                <input type="hidden" th:value="${user.enabled}" th:field="*{enabled}" name="enabled">
 
                 <div class="form-group">
                     <label for="userName">UserName</label>
@@ -41,7 +46,8 @@
 
                 <div class="form-actions col-xs-offset-2 col-xs-10">
                     <input type="submit" class="btn btn-primary" value="Modify User"/>
-                    <a id="modDiv" class="btn btn-primary" href="#" th:href="@{'/deleteUser/'+${user.id}}">Delete User</a>
+                    <a id="modDiv" class="btn btn-primary" href="#" th:href="@{'/deleteUser/'+${user.id}}">Delete
+                        User</a>
                 </div>
             </form>
         </div>
