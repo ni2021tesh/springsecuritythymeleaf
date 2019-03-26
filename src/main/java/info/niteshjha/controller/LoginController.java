@@ -4,10 +4,10 @@ package info.niteshjha.controller;
 
 import info.niteshjha.exception.EmailExistsException;
 import info.niteshjha.model.EmailValidationToken;
+import info.niteshjha.model.SecurityQuestion;
+import info.niteshjha.model.SecurityQuestionDefinition;
 import info.niteshjha.model.User;
-import info.niteshjha.service.EmailValidationTokenService;
-import info.niteshjha.service.SimpleMailService;
-import info.niteshjha.service.UserCreateService;
+import info.niteshjha.service.*;
 import info.niteshjha.validation.ValidatePassword;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,15 +40,21 @@ public class LoginController {
     @Autowired
     private Environment environment;
 
+    private final SecurityQuestionService securityQuestionService;
+
+    private final SecurityQuestionDefinitionService securityQuestionDefinitionService;
+
     @Autowired
-    public LoginController(UserCreateService userCreateService, EmailValidationTokenService emailValidationTokenService, SimpleMailService mailService) {
+    public LoginController(UserCreateService userCreateService, EmailValidationTokenService emailValidationTokenService, SimpleMailService mailService, SecurityQuestionService securityQuestionService, SecurityQuestionDefinitionService securityQuestionDefinitionService) {
         this.userCreateService = userCreateService;
         this.emailValidationTokenService = emailValidationTokenService;
         this.mailService = mailService;
+        this.securityQuestionService = securityQuestionService;
+        this.securityQuestionDefinitionService = securityQuestionDefinitionService;
     }
 
     @PostMapping(value = "/saveUser")
-    public ModelAndView userRegistration(@Valid User user, BindingResult result, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+    public ModelAndView userRegistration(@Valid User user, @RequestParam Long questionId, @RequestParam String answer, BindingResult result, RedirectAttributes redirectAttributes, HttpServletRequest request) {
 
         new ValidatePassword().validate(user, result);
 
@@ -59,6 +65,11 @@ public class LoginController {
         try {
             String token = UUID.randomUUID().toString();
             User signUpUser = this.userCreateService.createSignUpUser(user);
+
+            SecurityQuestionDefinition securityDefinition = securityQuestionDefinitionService.getSecurityDefinition(questionId);
+
+            securityQuestionService.saveSecurityQuestion(new SecurityQuestion(signUpUser, securityDefinition, answer));
+
             emailValidationTokenService.createValidationTokenForUser(token, signUpUser);
             String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
             String url = appUrl + "/confirmEmail?token=" + token;

@@ -1,4 +1,4 @@
-create table if not exists user_create
+/*create table if not exists user_create
 (
   id            int primary key AUTO_INCREMENT,
   date_created  varchar(50),
@@ -7,3 +7,4 @@ create table if not exists user_create
   name          varchar(50)
 );
 
+*/

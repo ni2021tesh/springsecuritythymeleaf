@@ -90,6 +90,13 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>27.1-jre</version>
+            <!-- or, for Android: -->
+        </dependency>
     </dependencies>
 
     <build>
@@ -99,12 +106,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-        <!--<resources>
-            <resource>
-                <filtering>false</filtering>
-                <directory>src/main/resources/**</directory>
-            </resource>
-        </resources>-->
     </build>
 
 </project>

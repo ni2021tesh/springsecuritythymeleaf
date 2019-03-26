@@ -1,18 +1,17 @@
 package info.niteshjha.controller;
 
+import com.google.common.collect.ImmutableMap;
 import info.niteshjha.config.UserService;
 import info.niteshjha.model.PasswordResetToken;
 import info.niteshjha.model.User;
-import info.niteshjha.service.PasswordResetTokenService;
-import info.niteshjha.service.SimpleMailService;
-import info.niteshjha.service.UserCreateService;
+import info.niteshjha.service.*;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,22 +28,28 @@ import java.util.UUID;
 @Slf4j
 public class IndexController {
 
-    private UserCreateService userCreateService;
+    private final UserCreateService userCreateService;
 
-    private PasswordResetTokenService passwordResetTokenService;
+    private final PasswordResetTokenService passwordResetTokenService;
 
-    @Autowired
-    private SimpleMailService mailService;
+    private final SimpleMailService mailService;
 
-    @Autowired
-    private Environment env;
+    private final Environment env;
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    public IndexController(UserCreateService userCreateService, PasswordResetTokenService passwordResetTokenService) {
+    private final SecurityQuestionService securityQuestionService;
+
+    private final SecurityQuestionDefinitionService securityQuestionDefinitionService;
+
+    public IndexController(UserCreateService userCreateService, PasswordResetTokenService passwordResetTokenService, SimpleMailService mailService, Environment env, UserService userService, SecurityQuestionService securityQuestionService, SecurityQuestionDefinitionService securityQuestionDefinitionService) {
         this.userCreateService = userCreateService;
         this.passwordResetTokenService = passwordResetTokenService;
+        this.mailService = mailService;
+        this.env = env;
+        this.userService = userService;
+        this.securityQuestionService = securityQuestionService;
+        this.securityQuestionDefinitionService = securityQuestionDefinitionService;
     }
 
     @RequestMapping({"/", "/login"})
@@ -54,7 +59,11 @@ public class IndexController {
 
     @RequestMapping("/signup")
     public ModelAndView register() {
-        return new ModelAndView("/signup", "user", new User());
+        ModelMap modelMap = new ModelMap()
+                .addAttribute("user", new User())
+                .addAttribute("securityQuestions", securityQuestionDefinitionService.getAllSecQuestion());
+
+        return new ModelAndView("/signup", modelMap);
     }
 
 
@@ -130,24 +139,34 @@ public class IndexController {
 
         SecurityContextHolder.getContext().setAuthentication(auth);
 
-        return new ModelAndView("redirect:/resetPassword");
+        securityQuestionDefinitionService.getAllSecQuestion().forEach(System.out::println);
+
+
+        return new ModelAndView("resetPassword", ImmutableMap.of("securityQuestions", securityQuestionDefinitionService.getAllSecQuestion()));
 
     }
 
     @RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
-    public ModelAndView savePassword(@RequestParam("password") final String password, @RequestParam("confirmPassword") final String passwordConfirmation, final RedirectAttributes redirectAttributes) {
+    public ModelAndView savePassword(@RequestParam("password") final String password, @RequestParam("confirmPassword") final String passwordConfirmation, @RequestParam Long questionId, @RequestParam String answer, final RedirectAttributes redirectAttributes) {
 
         if (!password.equals(passwordConfirmation)) {
             final Map<String, Object> model = new HashMap<>();
             model.put("errorMessage", "Passwords do not match");
+            model.put("securityQuestions", securityQuestionDefinitionService.getAllSecQuestion());
             return new ModelAndView("resetPassword", model);
         }
 
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (securityQuestionService.getSecurityQuestionByUserIdAndAnswer(questionId, principal.getId(), answer) == null) {
+            final Map<String, Object> model = new HashMap<>();
+            model.put("errorMessage", "Answer to security question is incorrect");
+            model.put("securityQuestions", securityQuestionDefinitionService.getAllSecQuestion());
+            return new ModelAndView("resetPassword", model);
+        }
+
 
         principal.setPassword(password);
         principal.setEnabled(true);
-
         userCreateService.modifyUser(principal);
 
         redirectAttributes.addFlashAttribute("successMessage", "Password has been reset successfully.");

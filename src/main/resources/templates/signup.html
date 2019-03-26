@@ -16,6 +16,23 @@
                 <span id="conPass" th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error">Email Id Exists</span>
 
             </div>
+
+            <div class="form-group">
+                <label for="question">Security Question :</label>
+                    <select id="question" name="questionId">
+                        <option th:each="securityQuestion : ${securityQuestions}"
+                                th:value="${securityQuestion.secQueId}" th:text="${securityQuestion.question}">Questions
+                        </option>
+                    </select>
+            </div>
+
+            <div class="form-group">
+                <label for="questionAnswer">Answer :</label>
+                <input type="text" class="form-control" id="questionAnswer" placeholder="Answer" required="required"
+                       name="answer"/>
+            </div>
+
+
             <div class="form-group">
                 <label for="reg-pwd">Password</label>
                 <input type="password" class="form-control" id="reg-pwd" placeholder="Password" required="required"
@@ -26,7 +43,8 @@
                 <label for="conf-pwd">Confirm Password</label>
                 <input type="password" class="form-control" id="conf-pwd" placeholder="Confirm Password"
                        name="confirmPassword" required="required" th:field="*{confirmPassword}"/>
-                <span id="conPass" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="form-text">Password Confirmation Error</span>
+                <span id="conPass" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"
+                      class="form-text">Password Confirmation Error</span>
             </div>
             <input type="submit" class="btn btn-primary" name="Create User" value="Create User"/>
         </form>
