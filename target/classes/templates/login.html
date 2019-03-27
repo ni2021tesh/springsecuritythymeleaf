@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:include="/fragment/layout :: layout(title='Login Page')">
+
+<body>
+<div class="container" th:fragment="content1">
+    <div id="jumboLog" class="jumbotron">
+        <h1 id="reg-h1">Login In</h1>
+        <div th:if="${param.error}" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"
+             class="alert alert-danger">Login Error
+        </div>
+        <div th:if="${successMessage}" th:text="${successMessage}" class="alert alert-success">Message</div>
+        <div th:if="${errorMessage}" th:text="${errorMessage}" class="alert alert-success">Error Message</div>
+        <div th:if="${message}" th:text="${message}" class="alert alert-success">Message</div>
+        <div th:if="${param.logout}" class="alert alert-success">You have been logged out.</div>
+        <form action="../../templates/html/login.html" th:action="@{/doLogin}" method="post">
+            <div class="form-group">
+                <label for="username">User Name</label>
+                <input type="text" class="form-control" id="username" aria-describedby="nameHelp"
+                       placeholder="Enter Your User Name" name="username" required="required"/>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword1">Password</label>
+                <input type="password" class="form-control" name="password" id="inputPassword1" placeholder="Password"
+                       required="required"/>
+            </div>
+
+            <div class="form-group">
+                <label for="remember">Remember Me </label>
+                <input id="remember" type="checkbox" name="remM2Cook" value="true"/>
+            </div>
+
+
+            <div class="form-actions col-xs-offset-2 col-xs-10">
+                <input type="submit" class="btn btn-primary" value="Sign In"/>
+                <a class="btn btn-primary" href="#" th:href="@{/forgotPassword}">Forgot Password</a>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

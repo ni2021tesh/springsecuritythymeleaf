@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: info.niteshjha.springsecuritywithbootstrap.SpringsecuritywithbootstrapApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.819 s - in info.niteshjha.springsecuritywithbootstrap.SpringsecuritywithbootstrapApplicationTests
