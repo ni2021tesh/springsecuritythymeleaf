@@ -53,7 +53,7 @@ public class SpringsecuritywithbootstrapApplication implements CommandLineRunner
 
     @Override
     public void run(String... args) throws Exception {
-        this.userService.createSignUpUser(new User(5001L, "Nitesh", "niteshjha2021@gmail.com", "nitesh123", null, LocalDateTime.now(), LocalDateTime.now(), true));
+        this.userService.createSignUpUser(new User(5001L, "Nitesh", "test123@gmail.com", "nitesh123", null, LocalDateTime.now(), LocalDateTime.now(), true));
         this.securityQuestionDefinitionService.saveAllSecurityQuestionDefinition(getListOfSecurityQuestionDefinition());
     }
 

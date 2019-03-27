@@ -54,7 +54,7 @@ public class IndexController {
 
     @RequestMapping({"/", "/login"})
     public ModelAndView getIndex() {
-        return new ModelAndView("/login", "user", new User());
+        return new ModelAndView("login", "user", new User());
     }
 
     @RequestMapping("/signup")
@@ -63,7 +63,7 @@ public class IndexController {
                 .addAttribute("user", new User())
                 .addAttribute("securityQuestions", securityQuestionDefinitionService.getAllSecQuestion());
 
-        return new ModelAndView("/signup", modelMap);
+        return new ModelAndView("signup", modelMap);
     }
 
 
