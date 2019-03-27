@@ -64,13 +64,18 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
                             .loginPage("/login")
                             .permitAll()
                             .loginProcessingUrl("/doLogin")
-                            .successForwardUrl("/userList")
+                            .successForwardUrl("/listUser")
                 .and().logout().permitAll()
                             .logoutUrl("/doLogout")
                             .logoutSuccessUrl("/login?logout")
 
                 .and().csrf().disable()
-                .rememberMe().key("myappkey");
+                .rememberMe()
+                    .key("myprivatekeyoverhere")
+                    .rememberMeCookieName("nRemCook")
+                    .rememberMeParameter("remM2Cook")
+                    .tokenValiditySeconds(900);
+                  //  .useSecureCookie(true);
 
         //@formatter:on
     }

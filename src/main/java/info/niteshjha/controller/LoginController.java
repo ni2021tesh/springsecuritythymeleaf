@@ -82,9 +82,9 @@ public class LoginController {
         return new ModelAndView("redirect:/login");
     }
 
-    @RequestMapping(value = "/userList", method = RequestMethod.POST)
+    @RequestMapping(value = "/listUser", method = RequestMethod.POST)
     public ModelAndView postUserList() {
-        return new ModelAndView("userList").addObject("userList", this.userCreateService.getUserList());
+        return new ModelAndView("redirect:/userList");
     }
 
     @RequestMapping(value = "/userList", method = RequestMethod.GET)
