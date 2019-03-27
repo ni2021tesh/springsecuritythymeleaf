@@ -23,4 +23,8 @@ public class SecurityQuestionDefinitionService {
     public List<SecurityQuestionDefinition> getAllSecQuestion() {
         return this.securityQuestionDefinitionRepository.findAll();
     }
+
+    public void saveAllSecurityQuestionDefinition(List<SecurityQuestionDefinition> securityQuestionDefinitions) {
+        this.securityQuestionDefinitionRepository.saveAll(securityQuestionDefinitions);
+    }
 }

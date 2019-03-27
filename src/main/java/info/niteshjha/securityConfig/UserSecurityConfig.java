@@ -57,6 +57,7 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
                                          "/user/forgotPassword*",
                                          "/changePassword*",
                                          "/saveUser*",
+                                         "/h2/**",
                                          "/confirmEmail*").permitAll()
                 .anyRequest().authenticated()
 
