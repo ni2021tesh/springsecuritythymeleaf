@@ -8,4 +8,4 @@ EXPOSE 8080
 
 ADD /target/springsecuritywithbootstrap-0.0.1-SNAPSHOT.jar springSecurity.jar
 
-CMD["java" ,"-jar","springSecurity.jar"]
+CMD ["java" ,"-jar","springSecurity.jar"]
