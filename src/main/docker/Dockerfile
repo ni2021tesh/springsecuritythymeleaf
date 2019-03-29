@@ -6,6 +6,6 @@ WORKDIR /usr/local/bin/
 
 EXPOSE 8080
 
-ADD /target/springsecuritywithbootstrap-0.0.1-SNAPSHOT.jar springSecurity.jar
+ADD maven/springsecuritywithbootstrap-0.0.1-SNAPSHOT.jar springSecurity.jar
 
 CMD ["java" ,"-jar","springSecurity.jar"]
