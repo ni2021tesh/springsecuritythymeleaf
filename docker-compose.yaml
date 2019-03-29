@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+
+  spring_security:
+    image: niteshjha2021/springsecurity-production:latest
+    networks:
+      - spring-sec-net
+    ports:
+      - 80:8080
+    links:
+      - mysql_db
+    restart: on-failure
+    container_name: spring_security
+
+  mysql_db:
+    image: mysql:5
+    networks:
+      - spring-sec-net
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=springsecurity
+    volumes:
+      - mysql_db:/var/lib/mysql
+    container_name: mysql_db
+
+networks:
+  spring-sec-net:
+
+volumes:
+  mysql_db:

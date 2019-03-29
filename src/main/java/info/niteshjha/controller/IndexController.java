@@ -78,9 +78,9 @@ public class IndexController {
         User userByEmail = this.userCreateService.getUserByEmail(email);
 
         if (userByEmail == null) {
-            log.info("Not found User with email id :: " + email);
-            redirectAttributes.addFlashAttribute("errorMessage", "Not found User with email id :: " + email);
-            new ModelAndView("redirect:/forgotPassword");
+            log.info("User not found with email id : " + email);
+            redirectAttributes.addFlashAttribute("errorMessage", "User not found with email id : " + email);
+            return new ModelAndView("redirect:/forgotPassword");
         }
 
         final String token = UUID.randomUUID().toString();
