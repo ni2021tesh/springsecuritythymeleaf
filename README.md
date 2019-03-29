@@ -1,4 +1,8 @@
---  command to run springsecurity application using docker
+Spring Security application can be run by executing all the docker command manually or it can be run through docker compose
+                        
+*******************************************************************************************************
+                        command to run spring security application manually
+*******************************************************************************************************
 
    1) run below command to create network
 
@@ -19,3 +23,12 @@
    5) type localhost in web browser url bar to connect to application
       
      localhost
+     
+*******************************************************************************************************
+                        command to run spring security application using docker-compose
+*******************************************************************************************************
+    
+   1) change the directory where "docker-compose.yaml" file is present
+   2) run the below command in terminal
+       
+    docker-compose up -d
