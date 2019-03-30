@@ -8,8 +8,16 @@ services:
       - spring-sec-net
     ports:
       - 80:8080
-    links:
+    depends_on:
       - mysql_db
+    deploy:
+      mode: replicated
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+      update_config:
+        parallelism: 1
+        delay: 120s
     restart: on-failure
     container_name: spring_security
 
@@ -23,6 +31,14 @@ services:
     volumes:
       - mysql_db:/var/lib/mysql
     container_name: mysql_db
+    deploy:
+      mode: replicated
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+      update_config:
+        parallelism: 1
+        delay: 120s
 
 networks:
   spring-sec-net:

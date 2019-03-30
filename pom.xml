@@ -138,7 +138,6 @@
 
                 <configuration>
                     <verbose>true</verbose>
-                    <extensions>true</extensions>
                     <images>
                         <image>
                             <name>niteshjha2021/springsecurity-production</name>
