@@ -32,3 +32,15 @@ Spring Security application can be run by executing all the docker command manua
    2) run the below command in terminal
        
     docker-compose up -d
+
+
+*******************************************************************************************************
+                        command to run spring security application using docker-swarm and docker-stack
+*******************************************************************************************************
+
+   1) open docker playground 
+   2) choose a template with 3 manager and 2 node( as it is recommended to use odd number of manager node )
+   3) drag and drop docker-compose.yaml file in any one of manager terminal
+   4) run the below command in docker swarm manager node.
+    
+    docker stack deploy -c docker-compose.yaml spring-security-stack     
